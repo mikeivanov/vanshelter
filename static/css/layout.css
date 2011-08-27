@@ -30,7 +30,7 @@ body {
 .shelter .available_beds {
     text-align: center;
     float: left;
-    margin: 10px;
+    margin: 0 10px 10px 10px;
     font-size: 14px;
     padding-right: 10px;
 }
