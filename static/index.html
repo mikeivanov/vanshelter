@@ -1,6 +1,111 @@
-<!DOCTYPE HTML>
+<!doctype html>
+<html lang="en">
 
-<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>VanShelter</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<!-- The 1140px Grid -->
+	<link rel="stylesheet" href="/static/css/1140.css" type="text/css" media="screen" />
+	
+	<!--[if lte IE 9]>
+	<link rel="stylesheet" href="/static/css/ie.css" type="text/css" media="screen" />
+	<![endif]-->
+	
+	<!-- Type and image presets - NOT ESSENTIAL -->
+	<link rel="stylesheet" href="/static/css/typeimg.css" type="text/css" media="screen" />
+	<!-- Make minor type adjustments for 1024 monitors -->
+	<link rel="stylesheet" href="/static/css/smallerscreen.css" media="only screen and (max-width: 1023px)" />
+	<!-- Resets grid for mobile -->
+	<link rel="stylesheet" href="/static/css/mobile.css" media="handheld, only screen and (max-width: 767px)" />
+	<!-- Put your layout here -->
+	<link rel="stylesheet" href="/static/css/layout.css" type="text/css" media="screen" />
+    
+    <script src="/static/js/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <script src="/static/js/jquery.poll-min.js" type="text/javascript"></script>
+    
+</head>
+
 <body>
 
-Nothing to see here yet.
+<div class="container">
+    <div class="row">
+        <div class="twelvecol" id="header">
+            <h1>VanShelter</h1>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateShelterAvailability() {
+      $.getJSON('/api/list', function(data) {
+        var shelter_list = data['data'];
+        $.each(shelter_list, function(key, details) {
+            
+            // build the div
+            var avail_beds = '<div class="available_beds"><strong>' + details['available'] + '</strong><br>of ' + details['capacity'] + ' beds</div>';
+            var shelter_name = '<h1>' + details['name'] + '</h1>';
+            var shelter_details = '<div class="details"><div class="address">' + details['address'] + '</div><div class="phone">' + details['phone'] + '</div><div class="restrictions">' + details['kind'] + "</div>";
+            var last_update = '<div class="updated">Last updated: ' + details['last_updated'] + "</div>";
+                            
+            var shelter_class = "shelter";
+            if (details['available'] == 0) {
+                shelter_class = "shelter full";
+            }
+            
+            if (details['available'] == null) {
+                shelter_class = "shelter na";
+            }
+            $('div#' + details['id']).html(shelter_name + avail_beds + shelter_details + last_update);
+                            
+          });
+      });
+    }
+
+
+    $(document).ready(function() {
+        // pull in data from api - first run to generate grid
+        $.getJSON('/api/list', function(data) {
+            
+            var shelter_list = data['data'];
+            var i = 0;
+            $('.container').append("<div class='row lastrow'></div>");
+            $.each(shelter_list, function(key, details) {
+                
+                // build the div
+                var avail_beds = '<div class="available_beds"><strong>' + details['available'] + '</strong><br>of ' + details['capacity'] + ' beds</div>';
+                var shelter_name = '<h1>' + details['name'] + '</h1>';
+                var shelter_details = '<div class="details"><div class="address">' + details['address'] + '</div><div class="phone">' + details['phone'] + '</div><div class="restrictions">' + details['kind'] + "</div>";
+                var last_update = '<div class="updated">Last updated: ' + details['last_updated'] + "</div>";
+                
+                if (i > 0 && i%4 == 0) {
+                    $('.row lastrow').removeClass('lastrow');
+                    $('.container').append("<div class='row lastrow'></div>");
+                }
+                
+                var shelter_class = "shelter";
+                if (details['available'] == 0) {
+                    shelter_class = "shelter full";
+                }
+                
+                if (details['available'] == null) {
+                    shelter_class = "shelter na";
+                }
+                $('.lastrow').append("<div class='threecol'><div id='" + details['id'] + "' class='" + shelter_class + "'>" + shelter_name + avail_beds + shelter_details + last_update + "</div></div>");
+                i++;
+                                
+              });
+        });
+            
+                
+        // re-populate rows
+        setInterval(updateShelterAvailability, 2000); 
+                
+    });
+</script>
+
+</body>
+
+</html>

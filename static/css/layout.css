@@ -1,0 +1,69 @@
+body {
+    font-family: Helvetica, sans-serif;
+    background-color: #1A0033;
+    color: #fff;
+}
+
+#header h1 {
+    font-size: 48px;
+    text-align: center;
+    margin: 10px auto;
+    text-shadow: 0px 1px 0px #aaa;
+}
+
+.shelter {
+    background-color: #fff;
+    color: #1A0033;
+    padding: 10px;
+    -moz-border-radius: 15px;
+    -moz-box-shadow:inset 0 0 5px #000000;
+    overflow: auto;
+}
+
+.shelter .available_beds {
+    text-align: center;
+    float: left;
+    margin: 10px;
+    font-size: 14px;
+    padding-right: 10px;
+}
+
+.shelter h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+.shelter .details {
+    margin: 10px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.shelter .details .address {
+    font-weight: bold;
+}
+
+.shelter .details .restrictions {
+    padding-top: 10px;
+}
+
+.shelter .updated {
+    clear: both;
+    text-align: center;
+    font-size: 12px;
+}
+
+.shelter .available_beds strong {
+    font-size: 70px;
+    color: #4FA300;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.shelter.full {
+    background-color: rgba(128,128,128,.5);
+}
+
+.shelter.full .available_beds strong {
+    color: #660200;
+    text-shadow: none;
+}
