@@ -1,3 +1,4 @@
 # Usage: pip -E env install -r requirements.txt
 
-bottle
+bottle==0.9.6
+python-twitter==0.8.2
