@@ -66,9 +66,9 @@ data = [dict(id="bcdata_bridge",
 def homepage():
     return bottle.static_file("index.html", root=STATIC_ROOT)
 
-@route('/static/:filename')
-def serve_static(filename):
-    return bottle.static_file(filename, root=STATIC_ROOT)
+@route('/static/:path#.+#')
+def server_static(path):
+    return bottle.static_file(path, root=STATIC_ROOT)
 
 @route('/api/list')
 def api_list():
