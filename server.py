@@ -7,6 +7,7 @@ import time
 import bottle
 import logging
 import urllib2
+import datetime
 import contextlib
 
 from bottle import route
@@ -16,6 +17,9 @@ STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
 logging.basicConfig()
 log = logging.getLogger('vanshelter')
 log.setLevel(logging.DEBUG)
+
+def now():
+    return datetime.datetime.now().isoformat()
 
 # our "database"
 data = [dict(id="bcdata_bridge",
@@ -27,6 +31,7 @@ data = [dict(id="bcdata_bridge",
              open_until=0,
              capacity=12,
              available=0,
+             last_updated=now(),
              kind="Women",
              notes=None),
 
@@ -39,6 +44,7 @@ data = [dict(id="bcdata_bridge",
              open_until=0,
              capacity=32,
              available=0,
+             last_updated=now(),
              kind="Women and their Children",
              notes=None),
 
@@ -51,6 +57,7 @@ data = [dict(id="bcdata_bridge",
              open_until=0,
              capacity=46,
              available=0,
+             last_updated=now(),
              kind="Men and Women",
              notes=None),
         ]
