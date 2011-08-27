@@ -69,7 +69,7 @@ body {
 }
 
 .shelter.full {
-    background-color: rgba(128,128,128,.5);
+    background-color: rgba(128,128,128,.9);
 }
 
 .shelter.full .available_beds strong {
