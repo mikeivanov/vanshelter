@@ -20,7 +20,11 @@ body {
     color: #1A0033;
     padding: 10px;
     -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
     -moz-box-shadow:inset 0 0 5px #000000;
+    -webkit-box-shadow: inset 0 0 5px #000000;
+    box-shadow: inset 0 0 5px #000000;
     overflow: auto;
     margin: 20px;
     float: left;
