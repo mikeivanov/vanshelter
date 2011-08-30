@@ -1,5 +1,4 @@
-#!/bin/sh
-set -o nounset
+#!/bin/bash
 set -o errexit
 virtualenv env
 source env/bin/activate
