@@ -15,6 +15,14 @@ body {
     color: #1A0033;
 }
 
+#header p {
+    background-color: #4FA300;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 10px;
+    text-align: center;
+}
+
 .shelter {
     background-color: #fff;
     color: #1A0033;
