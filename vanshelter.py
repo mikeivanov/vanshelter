@@ -14,7 +14,7 @@ from bottle import route
 
 STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
 
-UPDATE_INTERVAL = 30.0
+UPDATE_INTERVAL = 60.0 # once a minute
 
 logging.basicConfig()
 log = logging.getLogger('vanshelter')
@@ -91,9 +91,11 @@ def start():
             log.debug("update db")
             for shelter in data:
                 if shelter['twitter']:
-                    update_shelter_data(shelter)
+                    try:
+                        update_shelter_data(shelter)
+                    except:
+                        log.exception("Update Error")
             time.sleep(UPDATE_INTERVAL)
     updater = threading.Thread(target=update_db)
     updater.daemon = True
     updater.start()
-
